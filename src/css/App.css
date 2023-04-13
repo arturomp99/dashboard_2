@@ -1,0 +1,13 @@
+html {
+    height: 100%;
+}
+
+body {
+    position: relative;
+    margin: 8px;
+    height: calc(100% - 8px);
+}
+
+div#root {
+    height: 100%;
+}

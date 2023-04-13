@@ -1,0 +1,29 @@
+.dendrogramContainer {
+    height: 100%;
+    width: 100%;
+}
+
+.zoomContainer {
+    position: relative;
+    transform: translate(0,50%);
+}
+
+.node circle {
+    stroke: black;
+    stroke-width: 3px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.node text {
+    font: "HelveticaNeue", sans-serif;
+    user-select: none;
+    fill: black;
+}
+
+.link {
+    fill: none;
+    stroke: #756f6f;
+    stroke-width: 3px;
+    stroke-dasharray: 5;
+}

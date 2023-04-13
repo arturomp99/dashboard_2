@@ -1,0 +1,66 @@
+ul {
+    list-style-type: none;  /* Sets the default to no bullets */
+    display: block;
+    white-space: nowrap;
+    color:#fff;
+    position: relative;
+    padding-left: 1.0em; /* Indentation */
+}
+
+ul li:last-child:before {
+    top: 1rem;
+}
+
+ul li:hover {
+    background-color: #46494a;
+    font-weight: bold; /* DUDA, ¿Queda bien? */
+}
+
+.expandable {
+    cursor: pointer;
+    user-select: none;
+}
+
+.expandable::before {
+    position: absolute;
+    /* content: "\25B6";
+    color: #fff; 
+    will-change: transform;
+    transition: transform 300ms ease;
+    font-size: 0.7em;*/
+    border-top: 2px solid #fff;
+    margin-top: 0.5rem;
+    width: 0.5rem;
+    content: "";
+    text-align: center;
+    margin-left: -0.8rem;
+}
+
+.nested {
+    display: none;
+}
+
+.nested::before {
+    position: absolute;
+    border-left: 2px solid #fff;
+    border-left-width: 0.05em;
+    content: "";
+    height: 99%;
+    margin-top: 1%;
+    margin-left: -0.8rem;
+    border-top-width: 0.5em;    
+}
+
+.active {
+    display: block;
+}
+
+.down {
+    color: lightgreen;
+    font-weight: bold;
+}
+
+/* .down::before {
+    transform: rotate(90deg);
+    transform-origin: center;
+} */

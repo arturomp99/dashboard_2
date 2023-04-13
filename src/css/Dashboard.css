@@ -1,0 +1,23 @@
+.menuPane {
+    background-color: #191c1e;
+    overflow: scroll;
+    font-family: Arial;
+}
+
+.menuPane::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background: white;
+}
+
+/* Ponemos un color de fondo y redondeamos las esquinas del thumb */
+.menuPane::-webkit-scrollbar-thumb {
+    background: #c3c3c3;
+    border-radius: 4px;
+}
+
+/* Cambiamos el fondo y agregamos una sombra cuando esté en hover */
+.menuPane::-webkit-scrollbar-thumb:hover {
+    background: #a4a4a4;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
