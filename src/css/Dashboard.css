@@ -21,3 +21,19 @@
     background: #a4a4a4;
     box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
 }
+
+.fullscreenBtn {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 1;
+}
+
+.collapse {
+    display: none;
+}
+
+.expand {
+    grid-column: 1 / span 2; /*TODO: NOT WORKING*/
+    grid-row: 1 / span 2;
+}

@@ -10,6 +10,7 @@ export default class Dendrogram extends React.Component {
         this.dendrogramRef = createRef();
         // Reading props
         this.data = props.data;
+        this.btn = props.children;
         // TWEAKABLES
         this.duration = 750;
         this.r_1 = 12;
@@ -25,7 +26,10 @@ export default class Dendrogram extends React.Component {
 
     render() {
         return (
-        <svg ref={this.dendrogramRef}></svg>
+            <>
+                <svg ref={this.dendrogramRef} style={{position: "absolute", top:"0px"}}></svg>
+                {this.btn}
+            </>
         )
     }
 

@@ -6,7 +6,8 @@ import Timeline from './../components/timeline';
 import { useState, useEffect } from 'react';
 import fileName from "./../data/FloraFauna.json";
 import timeFile from "./../data/self-generated.json";
-import Resizable from "react-resizable-layout";
+
+// TODO: We could animate the fullscreen.
 
 const Layout = ({
     children
@@ -14,9 +15,15 @@ const Layout = ({
     const [menu, dendrogram, right] = children;
     return (
         <Container>
-            <Pane1>{menu}</Pane1>
-            <Pane2>{dendrogram}</Pane2>
-            <Pane3>{right}</Pane3>
+            <Pane1 className='menuPane'>
+                {menu}
+            </Pane1>
+            <Pane2 className='dendrogramPane'>
+                 {dendrogram}
+            </Pane2>
+            <Pane3 className='timelinePane'>
+                {right}
+            </Pane3>
         </Container>
     )
 }
@@ -35,10 +42,18 @@ export const Dashboard = () => {
 
     return <Layout>
         <DendrogramMenu data={taxData}/>
-        <Dendrogram data={taxData}/>
+        <Dendrogram data={taxData}>
+            <button className="fullscreenBtn" onClick={fullscreenOnClick}>Full Screen</button>
+        </Dendrogram>
         <Timeline data={timeData}/>
     </Layout>
 }
+
+const fullscreenOnClick = () => {        // TODO: COULD THIS BE DONE MORE EFFICIENTLY??
+    document.getElementsByClassName("menuPane")[0].classList.toggle('collapse');
+    document.getElementsByClassName("timelinePane")[0].classList.toggle('collapse');
+    document.getElementsByClassName("dendrogramPane")[0].classList.toggle('expand');
+};
 
 const Container = styled.div`
     height: 100%;
@@ -55,6 +70,7 @@ const Pane1 = styled.div`
 const Pane2 = styled.div`
     grid-column: 2;
     align-self: stretch;
+    position: relative;
 `
 
 const Pane3 = styled.div`
