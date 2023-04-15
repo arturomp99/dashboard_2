@@ -6,6 +6,7 @@ import Timeline from './../components/timeline';
 import { useState, useEffect } from 'react';
 import fileName from "./../data/FloraFauna.json";
 import timeFile from "./../data/self-generated.json";
+import Resizable from "react-resizable-layout";
 
 const Layout = ({
     children
@@ -13,15 +14,9 @@ const Layout = ({
     const [menu, dendrogram, right] = children;
     return (
         <Container>
-            <Pane1 className='menuPane'>
-                {menu}
-            </Pane1>
-            <Pane2 className='pane'>
-                 {dendrogram}
-            </Pane2>
-            <Pane3 className='pane'>
-                {right}
-            </Pane3>
+            <Pane1>{menu}</Pane1>
+            <Pane2>{dendrogram}</Pane2>
+            <Pane3>{right}</Pane3>
         </Container>
     )
 }

@@ -7,6 +7,7 @@ export default class DendrogramMenu extends React.Component {
 
     constructor(props)
     {
+        console.log("creating the dendrogram menu");
         super(props);
         this.data = props.data;
         this.menuRef = createRef();
