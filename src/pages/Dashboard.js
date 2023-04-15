@@ -16,10 +16,10 @@ const Layout = ({
             <Pane1 className='menuPane'>
                 {menu}
             </Pane1>
-            <Pane2 className='pane'>
+            <Pane2 className='dendrogramPane'>
                  {dendrogram}
             </Pane2>
-            <Pane3 className='pane'>
+            <Pane3 className='timelinePane'>
                 {right}
             </Pane3>
         </Container>
@@ -47,8 +47,10 @@ export const Dashboard = () => {
     </Layout>
 }
 
-const fullscreenOnClick = () => {
-    console.log("request full screen");
+const fullscreenOnClick = () => {        // TODO: COULD THIS BE DONE MORE EFFICIENTLY??
+    document.getElementsByClassName("menuPane")[0].classList.toggle('collapse');
+    document.getElementsByClassName("timelinePane")[0].classList.toggle('collapse');
+    document.getElementsByClassName("dendrogramPane")[0].classList.toggle('expand');
 };
 
 const Container = styled.div`

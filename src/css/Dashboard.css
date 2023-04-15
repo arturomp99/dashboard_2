@@ -28,3 +28,12 @@
     right: 0px;
     z-index: 1;
 }
+
+.collapse {
+    display: none;
+}
+
+.expand {
+    grid-column: 1 / span 2; /*TODO: NOT WORKING*/
+    grid-row: 1 / span 2;
+}
