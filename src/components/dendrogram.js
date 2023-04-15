@@ -8,6 +8,7 @@ export default class Dendrogram extends React.Component {
     {
         super(props);
         this.dendrogramRef = createRef();
+        this.btnRef = createRef();
         // Reading props
         this.data = props.data;
         // TWEAKABLES
@@ -25,7 +26,10 @@ export default class Dendrogram extends React.Component {
 
     render() {
         return (
-        <svg ref={this.dendrogramRef}></svg>
+            <>
+                <svg ref={this.dendrogramRef} style={{position: "absolute", top:"0px"}}></svg>
+                <button ref={this.btnRef} className="fullscreenBtn">Full Screen</button>
+            </>
         )
     }
 
@@ -42,6 +46,12 @@ export default class Dendrogram extends React.Component {
         this.zoom = d3.zoom().scaleExtent([0.2, 10])
             .on('zoom', (e)=>svg1.attr('transform', e.transform));
         d3.select(this.dendrogramRef.current).call(this.zoom);
+
+        // Add the fullscreen onclick event
+        this.btnRef.current.onclick = () => {
+            console.log("click");
+            if (this.dendrogramRef.current.requestFullscreen) this.dendrogramRef.current.requestFullscreen();
+        }
     }
 
     componentDidUpdate(prevProps) {

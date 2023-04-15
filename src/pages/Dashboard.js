@@ -60,6 +60,7 @@ const Pane1 = styled.div`
 const Pane2 = styled.div`
     grid-column: 2;
     align-self: stretch;
+    position: relative;
 `
 
 const Pane3 = styled.div`
