@@ -17,7 +17,10 @@ export default class Dendrogram extends React.Component {
 
     render() {
         return (
-        <svg ref={this.timelineRef}></svg>
+            <>
+                <svg ref={this.timelineRef}></svg>
+                <div id="tag" className={'tooltip'}></div>
+            </>
         )
     }
 
@@ -119,6 +122,17 @@ export default class Dendrogram extends React.Component {
                 .attr("width", d=>timeScale(new Date(d.finish_time)) - timeScale(new Date(d.start_time)))
                 .attr("height", rectWidth - rectMargin)
                 .style("fill", d=>colorScale(animalsIDs(d.id)))
-                .style("stroke", "none");
+                .style("stroke", "none")
+            .on('mouseover', (event, d)=>this.#showTag(event, d));
+            // TODO: Implement an onmousemove?? so that the tooltip follows the cursor
     }
+
+    #showTag(e, d) 
+    {
+        const tag = "Animal: " + d.id;
+        let output = document.getElementById("tag");
+        output.innerHTML = tag;
+        output.style.top = e.clientY;
+        output.style.right = e.clientX;
+    };
 }

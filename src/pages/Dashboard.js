@@ -7,6 +7,8 @@ import { useState, useEffect } from 'react';
 import fileName from "./../data/FloraFauna.json";
 import timeFile from "./../data/self-generated.json";
 
+// TODO: We could animate the fullscreen.
+
 const Layout = ({
     children
 }) => {
