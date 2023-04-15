@@ -40,10 +40,16 @@ export const Dashboard = () => {
 
     return <Layout>
         <DendrogramMenu data={taxData}/>
-        <Dendrogram data={taxData}/>
+        <Dendrogram data={taxData}>
+            <button className="fullscreenBtn" onClick={fullscreenOnClick}>Full Screen</button>
+        </Dendrogram>
         <Timeline data={timeData}/>
     </Layout>
 }
+
+const fullscreenOnClick = () => {
+    console.log("request full screen");
+};
 
 const Container = styled.div`
     height: 100%;
