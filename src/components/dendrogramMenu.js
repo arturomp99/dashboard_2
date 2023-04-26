@@ -7,7 +7,6 @@ export default class DendrogramMenu extends React.Component {
 
     constructor(props)
     {
-        console.log("creating the dendrogram menu");
         super(props);
         this.data = props.data;
         this.menuRef = createRef();
@@ -20,8 +19,11 @@ export default class DendrogramMenu extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        this.#addToPage(this.props.data, this.menuRef.current);
-        this.#clickFeedback();
+        if (this.props.data !== prevProps.data)
+        {
+            this.#addToPage(this.props.data, this.menuRef.current);
+            this.#clickFeedback();
+        }
     }
 
     // This function takes an element and a UL to add it to

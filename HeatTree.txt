@@ -1,0 +1,18 @@
+TRES VERSIONES DE HEAT TREE:
+- UNO NORMAL: De heat tree
+- Otro: Donde se resalten las cosas que se encuentran por sonido.
+- Otro: Donde se resalten las cosas de EDNA.
+
+PALETA DE COLORES PARA TIMELINE:
+- Colores el máximo de percebibles y escalabilidad.
+ https://godsnotwheregodsnot.blogspot.com/2012/09/color-distribution-methodology.html
+- Coger la de 64.
+ http://vrl.cs.brown.edu/color
+- Per la resta de la interfície, grisos, negres, blaus.
+
+Hover:
+- De dónde ha salido el animal.
+- Algo de información taxonómica.
+- Generar un código con ChatGPT para bajarse información de imágen, datos del animal, sonido...
+
+Trabajar en la parte interactiva.

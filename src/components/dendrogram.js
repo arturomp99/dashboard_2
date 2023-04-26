@@ -46,10 +46,18 @@ export default class Dendrogram extends React.Component {
         this.zoom = d3.zoom().scaleExtent([0.2, 10])
             .on('zoom', (e)=>svg1.attr('transform', e.transform));
         d3.select(this.dendrogramRef.current).call(this.zoom);
+
+        if(this.props.data.length !== 0) {
+            this.root = d3.hierarchy(this.props.data);
+            this.root.x0 = 0;
+            this.root.y0 = 0;
+            this.root.children.forEach(e=>this.#collapse(e));
+            this.#update(this.root);  
+        }
     }
 
     componentDidUpdate(prevProps) {
-        if(this.props.data !== []) { // Check if the data has been read
+        if(this.props.data !== prevProps.data) { // Check if the data has been read
             this.root = d3.hierarchy(this.props.data);
             this.root.x0 = 0;
             this.root.y0 = 0;
@@ -84,7 +92,6 @@ export default class Dendrogram extends React.Component {
                         d.children = d._children;
                         d._children = null;
                     }
-                    console.log();
                     this.#update(d);        // We use an arrow function in order not to change the meaning of this
                 });
             

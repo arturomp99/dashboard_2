@@ -8,8 +8,6 @@ export default class Dendrogram extends React.Component {
     {
         super(props);
         this.timelineRef = createRef();
-        // Reading props
-        this.data = props.data;
         
         // Tweakables
         this.animals = [];
@@ -30,16 +28,15 @@ export default class Dendrogram extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.data !== this.data) {
-            this.data = this.props.data;
-            this.data["detected animals"].forEach(e => {
+        if (this.props.data !== prevProps.data) {
+            this.props.data["detected animals"].forEach(e => {
                 if(this.animals.indexOf(e.id)===-1) this.animals.push(e.id);
             });
-            this.#update();
+            this.#update(this.props.data);
         }
     }
 
-    #update() {
+    #update(d) {
         // https://stackoverflow.com/questions/46649417/bbox-of-svg-is-zero
         let w = this.svg.node().getBoundingClientRect().width;
         let h = this.svg.node().getBoundingClientRect().height;
@@ -47,7 +44,7 @@ export default class Dendrogram extends React.Component {
         let colorScale = d3
             .scaleLinear()
             .domain([0, this.animals.length])
-            .range(["#00B9FA", "#F95002"])
+            .range(["rgb(150,233,124)", "rgb(4,50,85)", "rgb(47,221,206)", "rgb(71,36,137)", "rgb(223,184,245)", "rgb(90,20,56)", "rgb(158,203,244)", "rgb(11,69,18)", "rgb(229,134,254)", "rgb(75,164,11)", "rgb(255,0,135)", "rgb(9,245,76)", "rgb(214,6,26)", "rgb(44,146,139)", "rgb(133,36,5)", "rgb(191,205,142)", "rgb(66,32,240)", "rgb(106,127,47)", "rgb(161,19,178)", "rgb(38,119,213)", "rgb(233,215,55)", "rgb(63,45,19)", "rgb(247,184,162)", "rgb(133,100,74)", "rgb(254,165,59)", "rgb(195,103,133)"])
             .interpolate(d3.interpolateHcl);
 
         // *********************** CREATE AXES
@@ -58,8 +55,8 @@ export default class Dendrogram extends React.Component {
             *   YYY-MM-DDTHH:MM:SSZZ
             */ 
         let timeScale = d3.scaleTime()
-            .domain([d3.min(this.data["detected animals"], (d)=> new Date(d.start_time)),
-                d3.max(this.data["detected animals"], (d)=> new Date(d.finish_time))])
+            .domain([d3.min(d["detected animals"], (d)=> new Date(d.start_time)),
+                d3.max(d["detected animals"], (d)=> new Date(d.finish_time))])
             .range([0,w]);
         let xAxis = d3
             .axisBottom(timeScale)
@@ -114,8 +111,9 @@ export default class Dendrogram extends React.Component {
         this.svg
             .append('g')
             .selectAll('rect')
-            .data(this.data["detected animals"])
+            .data(d["detected animals"])
             .join('rect')
+                .attr("class", 'timelineRects')
                 .attr("x", d=>vertAxis.node().getBBox().width + timeScale(new Date(d.start_time)))
                 .attr("y", d=>animalsScale(d.id) + rectMargin/2)
                 .attr("rx", rectWidth/20)   // The edges rounding is a function of the height of the rectangles
@@ -123,16 +121,18 @@ export default class Dendrogram extends React.Component {
                 .attr("height", rectWidth - rectMargin)
                 .style("fill", d=>colorScale(animalsIDs(d.id)))
                 .style("stroke", "none")
-            .on('mouseover', (event, d)=>this.#showTag(event, d));
+            .on('mouseover', ()=>document.querySelector('.tooltip').style.visibility = 'visible')
+            .on('mousemove', (event, d)=>this.#showTag(event, d))
+            .on('mouseout', ()=>document.querySelector('.tooltip').style.visibility = 'hidden');
             // TODO: Implement an onmousemove?? so that the tooltip follows the cursor
     }
 
-    #showTag(e, d) 
+    #showTag(e, d)  // TODO: ShowTag with JS or with D3 ?????
     {
         const tag = "Animal: " + d.id;
         let output = document.getElementById("tag");
         output.innerHTML = tag;
-        output.style.top = e.clientY;
-        output.style.right = e.clientX;
+        output.style.top = e.clientY + 'px';
+        output.style.left = e.clientX + 'px';
     };
 }

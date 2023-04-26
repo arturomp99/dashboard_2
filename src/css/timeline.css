@@ -1,11 +1,19 @@
 .timelineContainer {
     height: 100%;
     width: 100%;
+    /* position: relative; */
 }
 
 .tooltip {
-    position: absolute;
+    background-color: red;
     display: block;
-    background: "red";
-    z-index: 1;
+    position: absolute;
+}
+
+.tooltip .visible{
+    visibility: visible;
+}
+
+.timelineRects:hover {
+    opacity: 0.8;
 }
